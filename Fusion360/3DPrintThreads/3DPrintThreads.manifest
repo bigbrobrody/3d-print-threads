@@ -1,0 +1,13 @@
+{
+  "autodeskProduct": "Fusion360",
+  "type": "addin",
+  "id": "7e0df751-7118-44c7-8e4e-6fec4d5c3987",
+  "author": "bigbrobrody",
+  "description": {
+    "": "Installs 3D-print-friendly metric thread definitions with tolerance classes from 0.0mm to 1.0mm."
+  },
+  "version": "1.0.0",
+  "runOnStartup": false,
+  "supportedOS": "windows|mac",
+  "editEnabled": true
+}
