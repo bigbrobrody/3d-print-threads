@@ -34,7 +34,7 @@ These classes are selectable in Fusion 360's standard Thread command after insta
 4. Click **Install 3D Print Threads** in the Solid/Create panel.
 5. Restart Fusion 360.
 
-The add-in writes `3DPrintMetric.xml` into Fusion's user `ThreadData` folder.
+The add-in writes `3DPrintMetric.xml` into Fusion's user `ThreadData` folder, including Windows `API\ThreadData` and webdeploy `Configuration\ThreadData` locations.
 
 ## Use
 
