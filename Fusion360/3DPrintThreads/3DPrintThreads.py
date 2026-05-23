@@ -25,6 +25,18 @@ def _thread_data_targets() -> List[Path]:
     appdata = os.getenv('APPDATA')
     if appdata:
         targets.append(Path(appdata) / 'Autodesk' / 'Autodesk Fusion 360' / 'API' / 'ThreadData')
+    localappdata = os.getenv('LOCALAPPDATA')
+    if localappdata:
+        production_root = Path(localappdata) / 'Autodesk' / 'webdeploy' / 'production'
+        try:
+            if production_root.is_dir():
+                for deployment in sorted(production_root.iterdir()):
+                    if deployment.is_dir():
+                        targets.append(
+                            deployment / 'Fusion' / 'Server' / 'Fusion' / 'Configuration' / 'ThreadData'
+                        )
+        except OSError:
+            pass
 
     targets.append(home / 'Library' / 'Application Support' / 'Autodesk' / 'Autodesk Fusion 360' / 'API' / 'ThreadData')
     return targets
