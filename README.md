@@ -34,7 +34,7 @@ The **3D Print Metric Rounded profile** uses a 90° included angle (45° per fla
 
 ## Install
 
-1. Copy `/home/runner/work/3d-print-threads/3d-print-threads/Fusion360/3DPrintThreads` into your Fusion 360 AddIns directory (%appdata%\Autodesk\Autodesk Fusion\API\AddIns).
+1. Copy `/home/runner/work/3d-print-threads/3d-print-threads/Fusion360/3DPrintThreads` into your Fusion 360 AddIns directory (%appdata%\Autodesk\FusionAddins).
 2. In Fusion 360, open **Utilities → Add-Ins → Scripts and Add-Ins**.
 3. Run **3DPrintThreads**.
 4. Click **Install 3D Print Threads** in the Solid/Create panel.
