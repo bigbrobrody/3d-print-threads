@@ -11,7 +11,7 @@ UI = APP.userInterface if APP else None
 
 CMD_ID = 'bigbrobrody_3dPrintThreads_install'
 CMD_NAME = 'Install 3D Print Threads'
-CMD_DESCRIPTION = 'Install metric 3D print thread definitions (0.0mm to 1.0mm tolerance classes).'
+CMD_DESCRIPTION = 'Install metric 3D print thread definitions (standard and rounded profiles, 0.0mm to 1.0mm tolerance classes).'
 WORKSPACE_ID = 'FusionSolidEnvironment'
 PANEL_ID = 'SolidCreatePanel'
 
@@ -43,9 +43,10 @@ def _thread_data_targets() -> List[Path]:
 
 
 def _install_profiles() -> Path:
-    source = Path(__file__).resolve().parent / 'resources' / 'thread_profiles' / '3DPrintMetric.xml'
-    if not source.exists():
-        raise FileNotFoundError(f'Missing thread profile file: {source}')
+    profiles_dir = Path(__file__).resolve().parent / 'resources' / 'thread_profiles'
+    sources = sorted(profiles_dir.glob('*.xml'))
+    if not sources:
+        raise FileNotFoundError(f'No thread profile XML files found in: {profiles_dir}')
 
     targets = _thread_data_targets()
     last_written = None
@@ -53,16 +54,17 @@ def _install_profiles() -> Path:
     for target in targets:
         try:
             target.mkdir(parents=True, exist_ok=True)
-            destination = target / source.name
-            shutil.copy2(source, destination)
-            last_written = destination
+            for source in sources:
+                destination = target / source.name
+                shutil.copy2(source, destination)
+                last_written = destination
         except OSError:
             continue
 
     if not last_written:
         raise OSError('No writable Fusion 360 ThreadData folder was found.')
 
-    return last_written
+    return last_written.parent
 
 
 class _ExecuteHandler(adsk.core.CommandEventHandler):
